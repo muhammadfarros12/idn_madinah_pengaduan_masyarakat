@@ -12,6 +12,14 @@ class AdminSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+    // $table->id();
+    //         $table->string('name');
+    //         $table->string('email')->unique();
+    //         $table->string('password');
+    //         $table->string(column: 'telp')->nullable();
+    //         $table->enum('role',['admin', 'user'])->default('user');
+    //         $table->rememberToken();
+    //         $table->timestamps();
     public function run(): void
     {
         $user = new User();
