@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -7,8 +8,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     // return view('welcome');
     // return view('front.form-pengaduan');
-    return view('dashboard.index');
-    // return view('front.semua-pengaduan');
+    // return view('dashboard.index');
+    return view('front.semua-pengaduan');
     // return view('front.index');
     // return view('front.statistik');
 })->middleware(['auth']);
@@ -25,9 +26,7 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function(){
-    Route::get('/', function () {
-        return view('dashboard.index');
-    });
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 });
 
 
