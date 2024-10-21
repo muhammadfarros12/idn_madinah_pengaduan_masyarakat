@@ -1,6 +1,7 @@
 <li
-    class="sidebar-item active ">
-    <a href="index.html" class='sidebar-link'>
+    {{-- ternary operator -> variable = condition ? true : false --}}
+    class="sidebar-item {{ request()->routeIs('admin.index') ? 'active' : '' }}">  
+    <a href="{{ route('admin.index') }}" class='sidebar-link'>
         <i class="bi bi-grid-fill"></i>
         <span>Dashboard</span>
     </a>
@@ -13,8 +14,9 @@
         <span>Lihat Pengaduan</span>
     </a>
 </li>
+
 <li
-    class="sidebar-item">
+    class="sidebar-item {{ request()->routeIs('admin.users.index') ? 'active' : '' }}">
     <a href="{{ route('admin.users.index') }}" class='sidebar-link'>
         <i class="bi bi-grid-fill"></i>
         <span>Master User</span>

@@ -29,6 +29,10 @@ Route::group(['middleware' => 'guest'], function () {
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function(){
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/users', [UsersController::class, 'index'])->name('admin.users.index');
+    Route::post('/users/store', [UsersController::class, 'store'])->name('admin.users.store');
+    Route::get('/users/edit/{id}', [UsersController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/users/update/{id}', [UsersController::class, 'update'])->name('admin.users.update');
+    Route::post('/users/destroy/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
 });
 
 

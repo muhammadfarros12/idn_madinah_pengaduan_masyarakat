@@ -13,34 +13,35 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form">
+                            <form class="form" action="{{ route('admin.users.store') }}" method="POST">
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-6 col-12 mb-3">
                                         <div class="form-group">
                                             <label for="first-name-column">Nama Lengkap</label>
                                             <input type="text" id="" class="form-control" placeholder="Nama Lengkap"
-                                                name="" required>
+                                                name="name" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12 mb-3">
                                         <div class="form-group">
                                             <label for="country-floating">Email</label>
-                                            <input type="email" id="" class="form-control" name="" placeholder="Email"
+                                            <input type="email" id="" class="form-control" name="email" placeholder="Email"
                                                 required>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12 mb-3">
                                         <div class="form-group">
                                             <label for="last-name-column">Nomor Telepon</label>
-                                            <input type="text" id="" class="form-control" placeholder="Nomor Telepon"
-                                                name="" required>
+                                            <input type="number" id="" class="form-control" placeholder="Nomor Telepon"
+                                                name="telp" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12 mb-3">
                                         <div class="form-group">
                                             <label for="city-column">Password</label>
                                             <input type="password" id="" class="form-control" placeholder="Masukkan Password"
-                                                name="" required>
+                                                name="password" required>
                                         </div>
                                     </div>
 
@@ -68,39 +69,24 @@
                                         <th>Pilihan</th>
                                     </thead>
                                     <tbody>
+                                        @foreach($users as $user)    
                                         <tr>
-                                            <td>john doe</td>
-                                            <td>johndoe@mail.com</td>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->email }}</td>
                                             <td>
-                                                <form action="">
+                                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
+                                                    @csrf
                                                     <a href="#" class="btn btn-success">Detail</a>
-                                                    <a href="#" class="btn btn-warning">Edit</a>
-                                                    <a href="#" class="btn btn-danger">Delete</a>
+                                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
+                                                    @if (Auth::user()->id == $user->id)
+                                                        <button disabled href="" class="btn btn-danger">Delete</button>
+                                                    @else
+                                                        <button type="submit" href="" class="btn btn-danger" onclick="return confirm('Apakah anda yakin akan menghapus data id ke {{ $user->id }} dengan {{ $user->name }} ini?')">Delete</button>
+                                                    @endif
                                                 </form>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>john doe</td>
-                                            <td>johndoe@mail.com</td>
-                                            <td>
-                                                <form action="">
-                                                    <a href="#" class="btn btn-success">Detail</a>
-                                                    <a href="#" class="btn btn-warning">Edit</a>
-                                                    <a href="#" class="btn btn-danger">Delete</a>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>john doe</td>
-                                            <td>johndoe@mail.com</td>
-                                            <td>
-                                                <form action="">
-                                                    <a href="#" class="btn btn-success">Detail</a>
-                                                    <a href="#" class="btn btn-warning">Edit</a>
-                                                    <a href="#" class="btn btn-danger">Delete</a>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
