@@ -2,18 +2,22 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/testing', function () {
-    // return view('welcome');
-    // return view('front.form-pengaduan');
-    // return view('dashboard.index');
-    // return view('front.semua-pengaduan');
-    return view('front.index');
-    // return view('front.statistik');
-})->middleware(['auth']);
+// Route::get('/', function () {
+//     // return view('welcome');
+//     // return view('front.form-pengaduan');
+//     // return view('dashboard.index');
+//     return view('front.semua-pengaduan');
+//     // return view('front.index');
+//     // return view('front.statistik');
+// });
+Route::get('/', [FrontController::class, 'semuaPengaduan'])->name('guest.complaints');
+Route::get('/complaint-statistics', [FrontController::class, 'semuaStatistik'])->name('guest.statistics');
+Route::get('/complaint-form', [FrontController::class, 'formPengaduan'])->name('guest.formcomplaint');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -24,6 +28,10 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('login', [LoginController::class, 'login']);
     Route::get('register', [LoginController::class, 'showRegistrationForm'])->name('register');
     Route::post('register', [LoginController::class, 'register']);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
 
 Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function(){

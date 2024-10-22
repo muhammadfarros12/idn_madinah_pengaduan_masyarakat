@@ -53,7 +53,7 @@
     <div id="app">
         <div id="main" class="layout-horizontal">
             
-            @include('includes.front.navbar')
+        @include('includes.front.navbar')
 
             <div class="content-wrapper container">
                 
