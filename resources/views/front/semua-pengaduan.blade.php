@@ -93,7 +93,31 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse($data as $value)    
                                 <tr>
+                                    
+                                    <td><img src="{{ $value->image }}" alt="{{ $value->title }}"></td>
+                                    <td>{{ $value->guest_name }}</td>
+                                    <td>{{ $value->title }}</td>
+                                    {{-- <td><span class="badge bg-success">Selesai</span></td> --}}
+                                    {{-- penggunaan cara pertama dari complaint model --}}
+                                    {{-- <td>{!! $value->status_badge !!}</td> --}}
+                                    {{-- penggunaan cara ke dua (menulis langsung didalam view blade) --}}
+                                    <td><span class="badge"
+                                    style="
+                                    background-color: 
+                                    @if($value->status == 'pending') #ff7976
+                                    @elseif($value->status == 'selesai') #5ddab4
+                                    @else #57caeb
+                                    @endif">{{ strtoupper($value->status) }}</span></td>
+
+                                </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4">Belum ada pengaduan</td>
+                                    </tr>
+                                @endforelse
+                                {{-- <tr>
                                     <td><img src="https://via.placeholder.com/50" alt="Gambar 1"></td>
                                     <td>John Doe</td>
                                     <td>Pengaduan Kebersihan</td>
@@ -110,61 +134,8 @@
                                     <td>Ali Ahmad</td>
                                     <td>Pengaduan Kerusakan Jalan</td>
                                     <td><span class="badge bg-danger">Dalam Proses</span></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/50" alt="Gambar 1"></td>
-                                    <td>John Doe</td>
-                                    <td>Pengaduan Kebersihan</td>
-                                    <td><span class="badge bg-success">Selesai</span></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/50/ff7f7f" alt="Gambar 2"></td>
-                                    <td>Jane Smith</td>
-                                    <td>Pengaduan Lalu Lintas</td>
-                                    <td><span class="badge bg-warning">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/50/7f7fff" alt="Gambar 3"></td>
-                                    <td>Ali Ahmad</td>
-                                    <td>Pengaduan Kerusakan Jalan</td>
-                                    <td><span class="badge bg-danger">Dalam Proses</span></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/50" alt="Gambar 1"></td>
-                                    <td>John Doe</td>
-                                    <td>Pengaduan Kebersihan</td>
-                                    <td><span class="badge bg-success">Selesai</span></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/50/ff7f7f" alt="Gambar 2"></td>
-                                    <td>Jane Smith</td>
-                                    <td>Pengaduan Lalu Lintas</td>
-                                    <td><span class="badge bg-warning">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/50/7f7fff" alt="Gambar 3"></td>
-                                    <td>Ali Ahmad</td>
-                                    <td>Pengaduan Kerusakan Jalan</td>
-                                    <td><span class="badge bg-danger">Dalam Proses</span></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/50" alt="Gambar 1"></td>
-                                    <td>John Doe</td>
-                                    <td>Pengaduan Kebersihan</td>
-                                    <td><span class="badge bg-success">Selesai</span></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/50/ff7f7f" alt="Gambar 2"></td>
-                                    <td>Jane Smith</td>
-                                    <td>Pengaduan Lalu Lintas</td>
-                                    <td><span class="badge bg-warning">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td><img src="https://via.placeholder.com/50/7f7fff" alt="Gambar 3"></td>
-                                    <td>Ali Ahmad</td>
-                                    <td>Pengaduan Kerusakan Jalan</td>
-                                    <td><span class="badge bg-danger">Dalam Proses</span></td>
-                                </tr>
+                                </tr> --}}
+
                             </tbody>
                         </table>
                     </div>

@@ -7,17 +7,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     // return view('welcome');
-//     // return view('front.form-pengaduan');
-//     // return view('dashboard.index');
-//     return view('front.semua-pengaduan');
-//     // return view('front.index');
-//     // return view('front.statistik');
-// });
+
 Route::get('/', [FrontController::class, 'semuaPengaduan'])->name('guest.complaints');
 Route::get('/complaint-statistics', [FrontController::class, 'semuaStatistik'])->name('guest.statistics');
 Route::get('/complaint-form', [FrontController::class, 'formPengaduan'])->name('guest.formcomplaint');
+Route::post('/complaint-form/store', [FrontController::class, 'storeComplaint'])->name('guest.formcomplaint.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
