@@ -36,5 +36,9 @@ class Complaint extends Model
     public function complaint(){
         return $this->hasMany(ComplaintResponse::class);
     }
+
+    function user() {
+        return $this->belongsTo(User::class);
+    }
     
 }

@@ -13,9 +13,9 @@ Route::get('/complaint-statistics', [FrontController::class, 'semuaStatistik'])-
 Route::get('/complaint-form', [FrontController::class, 'formPengaduan'])->name('guest.formcomplaint');
 Route::post('/complaint-form/store', [FrontController::class, 'storeComplaint'])->name('guest.formcomplaint.store');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -35,6 +35,10 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function(){
     Route::get('/users/edit/{id}', [UsersController::class, 'edit'])->name('admin.users.edit');
     Route::put('/users/update/{id}', [UsersController::class, 'update'])->name('admin.users.update');
     Route::post('/users/destroy/{id}', [UsersController::class, 'destroy'])->name('admin.users.destroy');
+    Route::get('/complaints', [AdminController::class, 'allComplaints'])->name('admin.all.complaints');
+    Route::get('/all-pending-complaints', [AdminController::class, 'allPendingComplaints'])->name('admin.all.pending.complaints');
+    Route::get('/all-process-complaints', [AdminController::class, 'allProcessComplaints'])->name('admin.all.process.complaints');
+    Route::get('/all-success-complaints', [AdminController::class, 'allSuccessComplaints'])->name('admin.all.success.complaints');
 });
 
 
