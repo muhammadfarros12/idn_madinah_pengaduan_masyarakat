@@ -97,7 +97,7 @@
                                 <tr>
                                     
                                     <td><img src="{{ $value->image }}" alt="{{ $value->title }}"></td>
-                                    <td>{{ $value->guest_name }}</td>
+                                    <td>{{  $value->user->name ?? $value->guest_name }}</td>
                                     <td>{{ $value->title }}</td>
                                     {{-- <td><span class="badge bg-success">Selesai</span></td> --}}
                                     {{-- penggunaan cara pertama dari complaint model --}}

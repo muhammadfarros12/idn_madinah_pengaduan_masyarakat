@@ -40,7 +40,7 @@ class UserComplaintController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.complaints.form-pengaduan');
     }
 
     /**
@@ -48,7 +48,34 @@ class UserComplaintController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+        ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $path = 'public/complaints';
+            $image = $request->file('image');
+            $name = $image->getClientOriginalName();
+            $imagePath = $request->file('image')->storeAs($path, $name);
+        }
+
+        $user = Auth::user();
+        $complaint = new Complaint();
+        $complaint->guest_name = $user->name;
+        $complaint->guest_email = $user->email;
+        $complaint->guest_telp = $user->telp;
+        $complaint->user_id = $user->id;
+
+        $complaint->title = $request->title;
+        $complaint->image = $imagePath;
+        $complaint->description = $request->description;
+
+        $complaint->save();
+        return redirect()->route('user.index')->with('msg','Pengaduan anda berhasil dikirimkan!');
+
     }
 
     /**

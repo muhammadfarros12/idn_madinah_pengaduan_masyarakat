@@ -45,6 +45,8 @@ Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function(){
 
 Route::prefix('user')->middleware(['auth', 'isUser'])->group(function() {
     Route::get('/',[UserComplaintController::class, 'index'])->name('user.index');
+    Route::get('/complaint-form',[UserComplaintController::class, 'create'])->name('user.form.complaint');
+    Route::post('/complaint-form/store',[UserComplaintController::class, 'store'])->name('user.form.complaint.store');
 });
 
 
