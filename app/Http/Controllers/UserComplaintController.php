@@ -78,6 +78,37 @@ class UserComplaintController extends Controller
 
     }
 
+    function allUserComplaints() {
+        $data = Complaint::where('user_id', auth::user()->id)->get();
+        return view('user.complaints.index', [
+            'data' => $data
+        ]);
+    }
+    function allPendingUserComplaints() {
+        $data = Complaint::where('user_id', auth::user()->id)
+                        ->where('status', 'pending')
+                        ->get();
+        return view('user.complaints.index', [
+            'data' => $data
+        ]);
+    }
+    function allProcessUserComplaints() {
+        $data = Complaint::where('user_id', auth::user()->id)
+                        ->where('status', 'proses')
+                        ->get();
+        return view('user.complaints.index', [
+            'data' => $data
+        ]);
+    }
+    function allDoneUserComplaints() {
+        $data = Complaint::where('user_id', auth::user()->id)
+                        ->where('status', 'selesai')
+                        ->get();
+        return view('user.complaints.index', [
+            'data' => $data
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */
