@@ -2,8 +2,7 @@
 
 namespace App\Models;
 
-use Attribute;
-use Illuminate\Database\Eloquent\Casts\Attribute as CastsAttribute;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,6 +39,13 @@ class Complaint extends Model
     function user() {
         return $this->belongsTo(User::class);
     }
+
+    protected function imageUpload(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($image) => url('storage/complaints_pengguna/' . $image),
+        );
+    } 
 
     
 }

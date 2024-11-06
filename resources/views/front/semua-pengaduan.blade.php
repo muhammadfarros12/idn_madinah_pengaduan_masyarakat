@@ -96,7 +96,8 @@
                                 @forelse($data as $value)    
                                 <tr>
                                     
-                                    <td><img src="{{ $value->image }}" alt="{{ $value->title }}"></td>
+                                    <td><img src="{{ asset('/storage/complaints_pengguna/' . $value->image) }}" alt="{{ $value->title }}" width="100" height="150"></td>
+                                    {{-- <td><img src="{{ $value->imageUpload }}" alt="{{ $value->title }}" width="100" height="100"></td> --}}
                                     <td>{{  $value->user->name ?? $value->guest_name }}</td>
                                     <td>{{ $value->title }}</td>
                                     {{-- <td><span class="badge bg-success">Selesai</span></td> --}}

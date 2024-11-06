@@ -59,9 +59,16 @@ class AdminController extends Controller
             'response' => 'required|string'
         ]);
 
+        // $imagePath = null;
+        // if ($request->hasFile('image')) {
+        //     $image = $request->file('image');
+        //     $imagePath = $image->store('public/responses_complaint');
+        // }
+        // feature image for response complaint coming soon
         $response = new ComplaintResponse;
         $response->complaint_id = $request->complaint_id;
         $response->admin_id = Auth::user()->id;
+        // $response->image = $imagePath ? basename($imagePath) : null;
         $response->response = $request->input('response');
         $response->save();
 
